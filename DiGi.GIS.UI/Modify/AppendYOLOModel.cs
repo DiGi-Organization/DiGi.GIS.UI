@@ -19,7 +19,7 @@ namespace DiGi.GIS.UI
         /// <param name="owner">The owner window used for displaying modal dialogs.</param>
         /// <param name="yOLOConversionOptions">The options for YOLO conversion. If null, a new instance of <see cref="YOLOConversionOptions"/> will be initialized.</param>
         /// <returns><c>true</c> if the model was successfully appended; otherwise, <c>false</c>.</returns>
-        // TODO [YearBuiltPipelineFileSource]: Superseded by DiGi.GIS.YOLO.UI Modify.AppendYOLOTrainingDatasetAsync (ZiolkowskiJakub/DiGi.GIS.YOLO.UI#13). Do not remove until the DB-sourced dataset builder (ZiolkowskiJakub/DiGi.GIS.YOLO.UI#13) has appended a dataset from deployed data and weights trained on it have passed the acceptance gate of ZiolkowskiJakub/DiGi.GIS.YOLO.UI#12; tracking checklist: ZiolkowskiJakub/DiGi.YOLO#11.
+        // TODO [YearBuiltPipelineFileSource]: Superseded by DiGi.GIS.YOLO.UI Modify.AppendYOLOTrainingDatasetAsync (DiGi-Organization/DiGi.GIS.YOLO.UI#13). Do not remove until the DB-sourced dataset builder (DiGi-Organization/DiGi.GIS.YOLO.UI#13) has appended a dataset from deployed data and weights trained on it have passed the acceptance gate of DiGi-Organization/DiGi.GIS.YOLO.UI#12; tracking checklist: DiGi-Organization/DiGi.YOLO#11.
         [Obsolete("Superseded by DiGi.GIS.YOLO.UI Modify.AppendYOLOTrainingDatasetAsync. TODO [YearBuiltPipelineFileSource]")]
         public static bool AppendYOLOModel_Building2D(Window? owner, YOLOConversionOptions? yOLOConversionOptions = null)
         {

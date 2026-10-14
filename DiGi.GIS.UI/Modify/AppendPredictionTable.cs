@@ -1,4 +1,4 @@
-// TODO [YearBuiltPipelineFileSource]: Superseded by the automated Year Built Prediction pipeline (ZiolkowskiJakub/DiGi.YOLO#1). Do not remove without: 1. An automated pipeline run (wiki "Running a County", ZiolkowskiJakub/DiGi.GIS.YOLO.UI) completes a full sweep for at least one county against deployed PostgreSQL data, with the building_data detection and populated-year columns filled for that county, 2. Full database coverage established, 3. An explicit decision and developer opt-in (tracking checklist: ZiolkowskiJakub/DiGi.YOLO#11).
+// TODO [YearBuiltPipelineFileSource]: Superseded by the automated Year Built Prediction pipeline (DiGi-Organization/DiGi.YOLO#1). Do not remove without: 1. An automated pipeline run (wiki "Running a County", DiGi-Organization/DiGi.GIS.YOLO.UI) completes a full sweep for at least one county against deployed PostgreSQL data, with the building_data detection and populated-year columns filled for that county, 2. Full database coverage established, 3. An explicit decision and developer opt-in (tracking checklist: DiGi-Organization/DiGi.YOLO#11).
 using DiGi.Core.Classes;
 using DiGi.Core.IO.Table.Classes;
 using DiGi.GIS.Classes;
