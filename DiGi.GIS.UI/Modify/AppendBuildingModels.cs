@@ -1,6 +1,7 @@
 ﻿using DiGi.Analytical.Building.Classes;
 using DiGi.GIS.Classes;
 using System.Windows;
+using Window = System.Windows.Window;
 
 namespace DiGi.GIS.UI
 {

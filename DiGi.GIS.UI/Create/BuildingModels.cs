@@ -3,6 +3,7 @@ using DiGi.GIS.Classes;
 using Microsoft.Win32;
 using System.IO;
 using System.Windows;
+using Window = System.Windows.Window;
 
 namespace DiGi.GIS.UI
 {
