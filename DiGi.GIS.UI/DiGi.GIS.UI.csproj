@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
@@ -66,8 +66,6 @@
     <Reference Include="DiGi.GML">
       <HintPath>..\..\DiGi.GML\bin\DiGi.GML.dll</HintPath>
     </Reference>
-    <!-- Direct compile reference: overload resolution for extension methods in the enclosing DiGi.GIS
-         namespace (e.g. Convert.ToDiGi(this PunktAdresowy?)) must load types from this assembly. -->
     <Reference Include="DiGi.PRG.Geometry">
       <HintPath>..\..\DiGi.PRG\bin\DiGi.PRG.Geometry.dll</HintPath>
     </Reference>
