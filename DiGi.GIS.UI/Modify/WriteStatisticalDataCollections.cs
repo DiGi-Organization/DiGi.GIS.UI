@@ -2,6 +2,7 @@
 using DiGi.GIS.Classes;
 using DiGi.GIS.Constants;
 using Microsoft.Win32;
+using System.Globalization;
 
 namespace DiGi.GIS.UI
 {
@@ -15,7 +16,7 @@ namespace DiGi.GIS.UI
         {
             SaveFileDialog saveFileDialog = new()
             {
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.StatisticalUnitFile, FileExtension.StatisticalUnitFile)
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.StatisticalUnitFile, FileExtension.StatisticalUnitFile)
             };
             bool? saveFileDialog_Result = saveFileDialog.ShowDialog();
             if (saveFileDialog_Result == null || !saveFileDialog_Result.HasValue || !saveFileDialog_Result.Value)

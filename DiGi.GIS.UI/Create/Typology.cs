@@ -2,6 +2,7 @@
 using DiGi.Geometry.Planar.Interfaces;
 using DiGi.GIS.Classes;
 using DiGi.GIS.Enums;
+using System.Globalization;
 
 namespace DiGi.GIS.UI
 {
@@ -49,7 +50,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("46fea9c0-595b-416a-b636-6b36ee1d4fbc", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -317,7 +318,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("fac3c860-5e65-4c5f-9966-ed6e4753b0e0", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -620,7 +621,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("9167966d-0bde-431b-ac35-a5689ff096e7", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -933,7 +934,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("7d80653e-a9bc-416f-a1ee-450113357469", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -1207,7 +1208,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("33249d82-93bc-4a7a-9113-e6579703f3c3", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -1527,7 +1528,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("5507f608-5960-49c7-9f92-e5234d05319f", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -1691,7 +1692,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("78ae1eb5-98eb-4c8a-be3c-e8d5259147fd", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -1898,7 +1899,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("0131b910-f112-4748-93ce-e341aa56a9c2", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -2119,7 +2120,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("f203c3ff-7051-4635-8d49-50aea03dbfc0", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -2437,7 +2438,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("8807107b-5c59-41f6-9d2c-91fd103ef7b0", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -2790,7 +2791,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("2b4f234d-884b-40e6-9d4b-40aa565a6665", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -3153,7 +3154,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("f7c39a9a-6bbf-43b9-920e-91f5f4682dc4", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -3477,7 +3478,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("e8ef0f82-e927-44ec-8110-e3ad2e720caa", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -3847,7 +3848,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("0a86f38f-199b-4d61-a98d-2f72799ac23c", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -4061,7 +4062,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("fe6eaa8f-ec28-4adc-94b4-8ae6d49d318d", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }
@@ -4318,7 +4319,7 @@ namespace DiGi.GIS.UI
 
             Typology.Classes.Typology result = new("86f6558e-73f7-47ee-97dc-24f0c8e967e5", description);
 
-            if (!Typology.Modify.TryUpdateByName(result, null, string.Format("{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
+            if (!Typology.Modify.TryUpdateByName(result, null, string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", description ?? "???", administrativeDivision == null ? "???" : administrativeDivision.Name), "Location", out Typology.Classes.Typology? typology_GISModel) || typology_GISModel is null)
             {
                 return null;
             }

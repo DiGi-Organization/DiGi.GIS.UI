@@ -5,6 +5,7 @@ using DiGi.GIS.UI.Classes;
 using DiGi.VoTT;
 using DiGi.VoTT.Classes;
 using Microsoft.Win32;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -42,7 +43,7 @@ namespace DiGi.GIS.UI
 
             SaveFileDialog saveFileDialog = new()
             {
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", "VoTT json File", "json"),
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", "VoTT json File", "json"),
                 FileName = "VoTT.json",
                 Title = "Select VoTT File",
                 OverwritePrompt = false
@@ -148,7 +149,7 @@ namespace DiGi.GIS.UI
                             continue;
                         }
 
-                        string path_OrtoData = string.Format("{0}_{1}.jpeg", pathPrefix, year);
+                        string path_OrtoData = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.jpeg", pathPrefix, year);
 
                         JpegBitmapEncoder jpegBitmapEncoder = new();
                         jpegBitmapEncoder.Frames.Add(BitmapFrame.Create(bitmapImage));
@@ -179,7 +180,7 @@ namespace DiGi.GIS.UI
 
                         voTTModel.Add(asset);
 
-                        voTTModel.Add(asset.id, VoTT.Create.Region(min.X, min.Y, max.X, max.Y, year.ToString()));
+                        voTTModel.Add(asset.id, VoTT.Create.Region(min.X, min.Y, max.X, max.Y, year.ToString(CultureInfo.CurrentCulture)));
                     }
 
                     break;
@@ -218,7 +219,7 @@ namespace DiGi.GIS.UI
 
             SaveFileDialog saveFileDialog = new()
             {
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", "VoTT json File", "json"),
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", "VoTT json File", "json"),
                 FileName = "VoTT.json",
                 Title = "Select VoTT File",
                 OverwritePrompt = false
@@ -279,7 +280,7 @@ namespace DiGi.GIS.UI
                     continue;
                 }
 
-                string path_OrtoRange = Path.Combine(directory_Input, string.Format("{0}.{1}", Path.GetFileNameWithoutExtension(path_Input), Constants.FileExtension.OrtoRangeFile));
+                string path_OrtoRange = Path.Combine(directory_Input, string.Format(CultureInfo.CurrentCulture, "{0}.{1}", Path.GetFileNameWithoutExtension(path_Input), Constants.FileExtension.OrtoRangeFile));
                 if (!File.Exists(path_OrtoRange))
                 {
                     continue;
@@ -341,7 +342,7 @@ namespace DiGi.GIS.UI
 
                         int year = ortoData.DateTime.Year;
 
-                        string path_OrtoData = string.Format("{0}_{1}.jpeg", pathPrefix, year);
+                        string path_OrtoData = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.jpeg", pathPrefix, year);
 
                         JpegBitmapEncoder jpegBitmapEncoder = new();
                         jpegBitmapEncoder.Frames.Add(BitmapFrame.Create(bitmapImage));

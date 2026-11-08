@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Windows;
@@ -57,15 +58,15 @@ namespace DiGi.GIS.UI
                         }
 
                         string region = Path.GetFileNameWithoutExtension(zipArchiveEntry_Zip.Name);
-                        if (region.EndsWith("_GML"))
+                        if (region.EndsWith("_GML", StringComparison.CurrentCulture))
                         {
                             region = region[..^4];
                         }
 
                         string fileName_1, fileName_2;
 
-                        fileName_1 = string.Format(region + "_gml.zip");
-                        fileName_2 = string.Format(region + ".zip");
+                        fileName_1 = string.Format(CultureInfo.CurrentCulture, region + "_gml.zip");
+                        fileName_2 = string.Format(CultureInfo.CurrentCulture, region + ".zip");
 
                         tuples.Add(new Tuple<string, string>(string.Join("/", urlPrefix, "LOD2", fileName_1), Path.Combine(directory_Output, "LOD2", fileName_2)));
 
@@ -73,11 +74,11 @@ namespace DiGi.GIS.UI
                         {
                             string regionPrefix = region[..2];
 
-                            fileName_1 = string.Format(region + "_gml.zip");
-                            fileName_2 = string.Format(region + ".zip");
+                            fileName_1 = string.Format(CultureInfo.CurrentCulture, region + "_gml.zip");
+                            fileName_2 = string.Format(CultureInfo.CurrentCulture, region + ".zip");
 
-                            tuples.Add(new Tuple<string, string>(string.Join("/", urlPrefix, "LOD1", year.ToString(), regionPrefix, fileName_1), Path.Combine(directory_Output, "LOD1", year.ToString(), fileName_2)));
-                            tuples.Add(new Tuple<string, string>(string.Join("/", urlPrefix, "LOD1", year.ToString(), regionPrefix, fileName_2), Path.Combine(directory_Output, "LOD1", year.ToString(), fileName_2)));
+                            tuples.Add(new Tuple<string, string>(string.Join("/", urlPrefix, "LOD1", year.ToString(CultureInfo.CurrentCulture), regionPrefix, fileName_1), Path.Combine(directory_Output, "LOD1", year.ToString(CultureInfo.CurrentCulture), fileName_2)));
+                            tuples.Add(new Tuple<string, string>(string.Join("/", urlPrefix, "LOD1", year.ToString(CultureInfo.CurrentCulture), regionPrefix, fileName_2), Path.Combine(directory_Output, "LOD1", year.ToString(CultureInfo.CurrentCulture), fileName_2)));
                         }
                     }
                 }

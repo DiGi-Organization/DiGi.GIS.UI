@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -98,12 +99,12 @@ namespace DiGi.GIS.UI.Controls
         {
             if (predictedYear == null || !predictedYear.HasValue)
             {
-                TextBlock_Main.Text = year.ToString();
+                TextBlock_Main.Text = year.ToString(CultureInfo.CurrentCulture);
                 TextBlock_Main.FontWeight = FontWeights.Normal;
             }
             else
             {
-                TextBlock_Main.Text = year.Equals(predictedYear.Value) ? year.ToString() : string.Format("{0} ({1})", year, predictedYear);
+                TextBlock_Main.Text = year.Equals(predictedYear.Value) ? year.ToString(CultureInfo.CurrentCulture) : string.Format(CultureInfo.CurrentCulture, "{0} ({1})", year, predictedYear);
                 TextBlock_Main.FontWeight = FontWeights.Bold;
             }
         }

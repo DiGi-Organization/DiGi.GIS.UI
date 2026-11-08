@@ -3,6 +3,7 @@ using DiGi.GIS.Classes;
 using DiGi.GIS.Constants;
 using Microsoft.Win32;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 
@@ -37,7 +38,7 @@ namespace DiGi.GIS.UI
 
             string directory_BoundingBoxResultFile = openFolderDialog.FolderName;
 
-            string[] paths_BoundingBoxResultFile = Directory.GetFiles(directory_BoundingBoxResultFile, string.Format("*.{0}", YOLO.Constants.FileExtension.BoundingBoxResultFile), SearchOption.AllDirectories);
+            string[] paths_BoundingBoxResultFile = Directory.GetFiles(directory_BoundingBoxResultFile, string.Format(CultureInfo.CurrentCulture, "*.{0}", YOLO.Constants.FileExtension.BoundingBoxResultFile), SearchOption.AllDirectories);
             if (paths_BoundingBoxResultFile == null || paths_BoundingBoxResultFile.Length == 0)
             {
                 return false;
@@ -55,7 +56,7 @@ namespace DiGi.GIS.UI
 
             string directory_GISModelFile = openFolderDialog.FolderName;
 
-            string[] paths_GISModelFile = Directory.GetFiles(directory_GISModelFile, string.Format("*.{0}", FileExtension.GISModelFile), SearchOption.AllDirectories);
+            string[] paths_GISModelFile = Directory.GetFiles(directory_GISModelFile, string.Format(CultureInfo.CurrentCulture, "*.{0}", FileExtension.GISModelFile), SearchOption.AllDirectories);
             if (paths_GISModelFile == null || paths_GISModelFile.Length == 0)
             {
                 return false;
@@ -63,7 +64,7 @@ namespace DiGi.GIS.UI
 
             bool result = false;
 
-            string path_Building2DYearBuiltPredictionsFile_Temp = Path.Combine(directory_GISModelFile, string.Format("{0}.{1}", "TEMP", FileExtension.Building2DYearBuiltPredictionsFile));
+            string path_Building2DYearBuiltPredictionsFile_Temp = Path.Combine(directory_GISModelFile, string.Format(CultureInfo.CurrentCulture, "{0}.{1}", "TEMP", FileExtension.Building2DYearBuiltPredictionsFile));
 
             using (Building2DYearBuiltPredictionsFile building2DYearBuiltPredictionsFile_Temp = new(path_Building2DYearBuiltPredictionsFile_Temp))
             {
@@ -116,7 +117,7 @@ namespace DiGi.GIS.UI
                         return;
                     }
 
-                    string path_Building2DYearBuiltPredictionsFile = Path.Combine(directory, string.Format("{0}.{1}", Path.GetFileNameWithoutExtension(path_GISModelFile), FileExtension.Building2DYearBuiltPredictionsFile));
+                    string path_Building2DYearBuiltPredictionsFile = Path.Combine(directory, string.Format(CultureInfo.CurrentCulture, "{0}.{1}", Path.GetFileNameWithoutExtension(path_GISModelFile), FileExtension.Building2DYearBuiltPredictionsFile));
                     using (Building2DYearBuiltPredictionsFile building2DYearBuiltPredictionsFile = new(path_Building2DYearBuiltPredictionsFile))
                     {
                         building2DYearBuiltPredictionsFile.Open();

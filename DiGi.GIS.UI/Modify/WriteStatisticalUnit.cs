@@ -2,6 +2,7 @@
 using DiGi.GIS.Classes;
 using DiGi.GIS.Constants;
 using Microsoft.Win32;
+using System.Globalization;
 
 namespace DiGi.GIS.UI
 {
@@ -19,7 +20,7 @@ namespace DiGi.GIS.UI
 
             OpenFileDialog openFileDialog = new()
             {
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.StatisticalUnitFile, FileExtension.StatisticalUnitFile)
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.StatisticalUnitFile, FileExtension.StatisticalUnitFile)
             };
             dialogResult = openFileDialog.ShowDialog();
             if (dialogResult == null || !dialogResult.HasValue || !dialogResult.Value)
@@ -48,8 +49,8 @@ namespace DiGi.GIS.UI
 
             SaveFileDialog saveFileDialog = new()
             {
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.StatisticalDataCollectionFile, FileExtension.StatisticalDataCollectionFile),
-                FileName = string.Format("{0}.{1}", "StatisticalDataCollections", FileExtension.StatisticalDataCollectionFile)
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.StatisticalDataCollectionFile, FileExtension.StatisticalDataCollectionFile),
+                FileName = string.Format(CultureInfo.CurrentCulture, "{0}.{1}", "StatisticalDataCollections", FileExtension.StatisticalDataCollectionFile)
             };
             dialogResult = saveFileDialog.ShowDialog();
             if (dialogResult == null || !dialogResult.HasValue || !dialogResult.Value)

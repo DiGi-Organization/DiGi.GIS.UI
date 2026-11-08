@@ -3,6 +3,7 @@ using DiGi.GIS.Classes;
 using DiGi.GIS.Constants;
 using Microsoft.Win32;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 
@@ -79,7 +80,7 @@ namespace DiGi.GIS.UI
                 return false;
             }
 
-            string[] paths_GISModelFile = Directory.GetFiles(directory_GISModelFiles, string.Format("*.{0}", FileExtension.GISModelFile), SearchOption.AllDirectories);
+            string[] paths_GISModelFile = Directory.GetFiles(directory_GISModelFiles, string.Format(CultureInfo.CurrentCulture, "*.{0}", FileExtension.GISModelFile), SearchOption.AllDirectories);
             if (paths_GISModelFile == null || paths_GISModelFile.Length == 0)
             {
                 return false;
@@ -117,7 +118,7 @@ namespace DiGi.GIS.UI
                     return;
                 }
 
-                string path = Path.Combine(directory, string.Format("{0}.{1}", Path.GetFileNameWithoutExtension(path_GISModelFile), FileExtension.YearBuiltDataFile));
+                string path = Path.Combine(directory, string.Format(CultureInfo.CurrentCulture, "{0}.{1}", Path.GetFileNameWithoutExtension(path_GISModelFile), FileExtension.YearBuiltDataFile));
 
                 using YearBuiltDataFile yearBuiltDataFile = new(path);
                 yearBuiltDataFile.Open();

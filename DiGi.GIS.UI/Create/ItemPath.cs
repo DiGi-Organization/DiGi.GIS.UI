@@ -1,5 +1,6 @@
 ﻿using DiGi.Typology.Classes;
 using DiGi.UI.WPF.Classes;
+using System.Globalization;
 
 namespace DiGi.GIS.UI
 {
@@ -35,7 +36,7 @@ namespace DiGi.GIS.UI
                         return "???";
                     }
 
-                    return string.Format("{0} : {1} -> {2}", x.TypologyPath?.ToString() ?? "[???]", x.Description ?? "???", x.Name ?? "???");
+                    return string.Format(CultureInfo.CurrentCulture, "{0} : {1} -> {2}", x.TypologyPath?.ToString() ?? "[???]", x.Description ?? "???", x.Name ?? "???");
                 });
 
             List<string> names = [func.Invoke(typology_Temp)];

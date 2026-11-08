@@ -6,6 +6,7 @@ using DiGi.Geometry.Planar.Classes;
 using DiGi.GIS.Classes;
 using DiGi.GIS.Emgu.CV.Classes;
 using DiGi.GIS.Enums;
+using System.Globalization;
 using System.IO;
 
 namespace DiGi.GIS.UI
@@ -209,10 +210,10 @@ namespace DiGi.GIS.UI
                         row[index_Reference] = reference;
                         row[index_BuildingGeneralFunction] =  buildingGeneralFunction?.ToString();
                         row[index_BuildingPhase] = buidlingPhase?.ToString();
-                        row[index_Storeys] = storeys.ToString();
-                        row[index_Area] = area == null || !area.HasValue ? null : Core.Query.Round(area.Value, Core.Constants.Tolerance.MacroDistance).ToString();
-                        row[index_Location_X] = location == null ? null : Core.Query.Round(location.X, Core.Constants.Tolerance.MacroDistance).ToString();
-                        row[index_Location_Y] = location == null ? null : Core.Query.Round(location.Y, Core.Constants.Tolerance.MacroDistance).ToString();
+                        row[index_Storeys] = storeys.ToString(CultureInfo.CurrentCulture);
+                        row[index_Area] = area == null || !area.HasValue ? null : Core.Query.Round(area.Value, Core.Constants.Tolerance.MacroDistance).ToString(CultureInfo.CurrentCulture);
+                        row[index_Location_X] = location == null ? null : Core.Query.Round(location.X, Core.Constants.Tolerance.MacroDistance).ToString(CultureInfo.CurrentCulture);
+                        row[index_Location_Y] = location == null ? null : Core.Query.Round(location.Y, Core.Constants.Tolerance.MacroDistance).ToString(CultureInfo.CurrentCulture);
                         row[index_VoivodeshipName] = voivodeshipName;
                         row[index_CountyName] = countyName;
                         row[index_MunicipalityName] = municipalityName;
@@ -301,7 +302,7 @@ namespace DiGi.GIS.UI
                     {
                         Range<int>? range_Years = comparisonTableConversionOptions?.Years;
 
-                        string[] paths_StatisticalDataCollectionFile = Directory.GetFiles(comparisonTableConversionOptions!.StatisticalDirectory, string.Format("*.{0}", Constants.FileExtension.StatisticalDataCollectionFile));
+                        string[] paths_StatisticalDataCollectionFile = Directory.GetFiles(comparisonTableConversionOptions!.StatisticalDirectory, string.Format(CultureInfo.CurrentCulture, "*.{0}", Constants.FileExtension.StatisticalDataCollectionFile));
                         if (paths_StatisticalDataCollectionFile != null && paths_StatisticalDataCollectionFile.Length != 0)
                         {
                             foreach (string path_StatisticalDataCollectionFile in paths_StatisticalDataCollectionFile)
@@ -375,7 +376,7 @@ namespace DiGi.GIS.UI
                                                                     }
                                                                 }
 
-                                                                int index_Year = updateColumn.Invoke(string.Format("{0} {1}", name, year));
+                                                                int index_Year = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", name, year));
                                                                 row[index_Year] = value;
                                                             }
                                                         }
@@ -464,20 +465,20 @@ namespace DiGi.GIS.UI
 
                                 foreach (KeyValuePair<string, OrtoImageComparison> keyValuePair_OrtoImageComparison in dictionary_OrtoImageComparison)
                                 {
-                                    string prefix = string.Format("{0} {1} {2}", keyValuePair_OrtoImageComparison.Key, dateTime_1.Year, dateTime_2.Year);
+                                    string prefix = string.Format(CultureInfo.CurrentCulture, "{0} {1} {2}", keyValuePair_OrtoImageComparison.Key, dateTime_1.Year, dateTime_2.Year);
 
-                                    int index_AverageColorSimilarity = updateColumn.Invoke(string.Format("{0} {1}", prefix, "Average Color Similarity"));
-                                    int index_ColorDistributionShift = updateColumn.Invoke(string.Format("{0} {1}", prefix, "Color Distribution Shift"));
-                                    int index_GrayHistogramFactor = updateColumn.Invoke(string.Format("{0} {1}", prefix, "Gray Histograms Factor"));
-                                    int index_HammingDistance = updateColumn.Invoke(string.Format("{0} {1}", prefix, "Hamming Distance"));
-                                    int index_HistogramCorrelation = updateColumn.Invoke(string.Format("{0} {1}", prefix, "Histogram Correlation"));
-                                    int index_ShapeComparisonFactor = updateColumn.Invoke(string.Format("{0} {1}", prefix, "Shape Comparison Factor"));
-                                    int index_StructuralSimilarityIndex_AbsoluteDifference = updateColumn.Invoke(string.Format("{0} {1}", prefix, "Structural Similarity Index (Absolute Difference)"));
-                                    int index_StructuralSimilarityIndex_MatchTemplate = updateColumn.Invoke(string.Format("{0} {1}", prefix, "Structural Similarity Index (Match Template)"));
-                                    int index_MeanLaplacianFactor = updateColumn.Invoke(string.Format("{0} {1}", prefix, "Mean Laplacian Factor"));
-                                    int index_StandardDeviationLaplacianFactor = updateColumn.Invoke(string.Format("{0} {1}", prefix, "Standard Deviation Laplacian Factor"));
-                                    int index_OpticalFlowAverageMagnitude = updateColumn.Invoke(string.Format("{0} {1}", prefix, "Optical Flow Average Magnitude"));
-                                    int index_ORBFeatureMatchingFactor = updateColumn.Invoke(string.Format("{0} {1}", prefix, "ORB Feature Matching Factor"));
+                                    int index_AverageColorSimilarity = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "Average Color Similarity"));
+                                    int index_ColorDistributionShift = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "Color Distribution Shift"));
+                                    int index_GrayHistogramFactor = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "Gray Histograms Factor"));
+                                    int index_HammingDistance = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "Hamming Distance"));
+                                    int index_HistogramCorrelation = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "Histogram Correlation"));
+                                    int index_ShapeComparisonFactor = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "Shape Comparison Factor"));
+                                    int index_StructuralSimilarityIndex_AbsoluteDifference = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "Structural Similarity Index (Absolute Difference)"));
+                                    int index_StructuralSimilarityIndex_MatchTemplate = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "Structural Similarity Index (Match Template)"));
+                                    int index_MeanLaplacianFactor = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "Mean Laplacian Factor"));
+                                    int index_StandardDeviationLaplacianFactor = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "Standard Deviation Laplacian Factor"));
+                                    int index_OpticalFlowAverageMagnitude = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "Optical Flow Average Magnitude"));
+                                    int index_ORBFeatureMatchingFactor = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", prefix, "ORB Feature Matching Factor"));
 
                                     OrtoImageComparison ortoImageComparison = keyValuePair_OrtoImageComparison.Value;
 
@@ -744,7 +745,7 @@ namespace DiGi.GIS.UI
                                 {
                                     if (indexDataFile != null && indexDataFile.TryGetIndex(administrativeDivision.Reference, out int index))
                                     {
-                                        voivodeship = index.ToString();
+                                        voivodeship = index.ToString(CultureInfo.CurrentCulture);
                                     }
                                     else
                                     {
@@ -757,7 +758,7 @@ namespace DiGi.GIS.UI
                                 {
                                     if (indexDataFile != null && indexDataFile.TryGetIndex(administrativeDivision.Reference, out int index))
                                     {
-                                        county = index.ToString();
+                                        county = index.ToString(CultureInfo.CurrentCulture);
                                     }
                                     else
                                     {
@@ -770,7 +771,7 @@ namespace DiGi.GIS.UI
                                 {
                                     if (indexDataFile != null && indexDataFile.TryGetIndex(administrativeDivision.Reference, out int index))
                                     {
-                                        municipality = index.ToString();
+                                        municipality = index.ToString(CultureInfo.CurrentCulture);
                                     }
                                     else
                                     {
@@ -784,7 +785,7 @@ namespace DiGi.GIS.UI
                             {
                                 if (indexDataFile != null && indexDataFile.TryGetIndex(administrativeSubdivision.Reference, out int index))
                                 {
-                                    subdivision = index.ToString();
+                                    subdivision = index.ToString(CultureInfo.CurrentCulture);
                                 }
                                 else
                                 {
@@ -805,9 +806,9 @@ namespace DiGi.GIS.UI
 
                         Row row = new(-1);
                         row[index_Reference] = reference;
-                        row[index_BuildingGeneralFunction] = buildingGeneralFunction == null || !buildingGeneralFunction.HasValue ? -1 : ((int)buildingGeneralFunction.Value).ToString();
-                        row[index_BuildingPhase] = buidlingPhase == null || !buidlingPhase.HasValue ? -1 : ((int)buidlingPhase.Value).ToString();
-                        row[index_Storeys] = storeys.ToString();
+                        row[index_BuildingGeneralFunction] = buildingGeneralFunction == null || !buildingGeneralFunction.HasValue ? -1 : ((int)buildingGeneralFunction.Value).ToString(CultureInfo.CurrentCulture);
+                        row[index_BuildingPhase] = buidlingPhase == null || !buidlingPhase.HasValue ? -1 : ((int)buidlingPhase.Value).ToString(CultureInfo.CurrentCulture);
+                        row[index_Storeys] = storeys.ToString(CultureInfo.CurrentCulture);
                         row[index_Area] = area;
                         row[index_Location_X] = location?.X;
                         row[index_Location_Y] = location?.Y;
@@ -898,7 +899,7 @@ namespace DiGi.GIS.UI
                     {
                         Range<int>? range_Years = predictionTableConversionOptions?.Years;
 
-                        string[] paths_StatisticalDataCollectionFile = Directory.GetFiles(predictionTableConversionOptions!.StatisticalDirectory, string.Format("*.{0}", Constants.FileExtension.StatisticalDataCollectionFile));
+                        string[] paths_StatisticalDataCollectionFile = Directory.GetFiles(predictionTableConversionOptions!.StatisticalDirectory, string.Format(CultureInfo.CurrentCulture, "*.{0}", Constants.FileExtension.StatisticalDataCollectionFile));
                         if (paths_StatisticalDataCollectionFile != null && paths_StatisticalDataCollectionFile.Length != 0)
                         {
                             foreach (string path_StatisticalDataCollectionFile in paths_StatisticalDataCollectionFile)
@@ -965,7 +966,7 @@ namespace DiGi.GIS.UI
                                                                 }
                                                             }
 
-                                                            int index_Year = updateColumn.Invoke(string.Format("{0} {1}", name, year), typeof(double));
+                                                            int index_Year = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "{0} {1}", name, year), typeof(double));
                                                             row[index_Year] = value == null || !value.HasValue ? null : value.Value;
                                                         }
                                                     }
@@ -1004,19 +1005,19 @@ namespace DiGi.GIS.UI
 
                             int index = -1;
 
-                            index = updateColumn.Invoke(string.Format("Prediction Confidence {0}", i), typeof(double));
+                            index = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "Prediction Confidence {0}", i), typeof(double));
                             row[index] = yearBuiltPrediction.Confidence;
 
-                            index = updateColumn.Invoke(string.Format("Prediction BoundingBox X {0}", i), typeof(double));
+                            index = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "Prediction BoundingBox X {0}", i), typeof(double));
                             row[index] = yearBuiltPrediction.BoundingBox?.GetCentroid()?.X;
 
-                            index = updateColumn.Invoke(string.Format("Prediction BoundingBox Y {0}", i), typeof(double));
+                            index = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "Prediction BoundingBox Y {0}", i), typeof(double));
                             row[index] = yearBuiltPrediction.BoundingBox?.GetCentroid()?.Y;
 
-                            index = updateColumn.Invoke(string.Format("Prediction BoundingBox Width {0}", i), typeof(double));
+                            index = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "Prediction BoundingBox Width {0}", i), typeof(double));
                             row[index] = yearBuiltPrediction.BoundingBox?.Width;
 
-                            index = updateColumn.Invoke(string.Format("Prediction BoundingBox Height {0}", i), typeof(double));
+                            index = updateColumn.Invoke(string.Format(CultureInfo.CurrentCulture, "Prediction BoundingBox Height {0}", i), typeof(double));
                             row[index] = yearBuiltPrediction.BoundingBox?.Height;
                         }
                     }

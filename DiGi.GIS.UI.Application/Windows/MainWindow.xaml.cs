@@ -19,6 +19,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -121,7 +122,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             SaveFileDialog saveFileDialog = new()
             {
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.StatisticalUnitFile, FileExtension.StatisticalUnitFile)
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.StatisticalUnitFile, FileExtension.StatisticalUnitFile)
             };
             bool? saveFileDialog_Result = saveFileDialog.ShowDialog();
             if (saveFileDialog_Result == null || !saveFileDialog_Result.HasValue || !saveFileDialog_Result.Value)
@@ -192,7 +193,7 @@ namespace DiGi.GIS.UI.Application.Windows
                 return;
             }
 
-            Core.Query.Filter(paths_GISModelFile, x => System.IO.Path.GetFileNameWithoutExtension(x)!.EndsWith(fileNameSufix), out List<string>? paths_GISModelFile_New, out List<string>? paths_GISModelFile_Old);
+            Core.Query.Filter(paths_GISModelFile, x => System.IO.Path.GetFileNameWithoutExtension(x)!.EndsWith(fileNameSufix, StringComparison.CurrentCulture), out List<string>? paths_GISModelFile_New, out List<string>? paths_GISModelFile_Old);
 
             if (paths_GISModelFile_New == null || paths_GISModelFile_Old == null)
             {
@@ -292,7 +293,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             SaveFileDialog saveFileDialog = new()
             {
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.GISModelFile, FileExtension.GISModelFile)
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.GISModelFile, FileExtension.GISModelFile)
             };
             result = saveFileDialog.ShowDialog();
             if (result == null || !result.HasValue || !result.Value)
@@ -438,11 +439,11 @@ namespace DiGi.GIS.UI.Application.Windows
 
                 Core.Convert.ToSystem_FileInfo(building2D, @"C:\Users\jakub\GitHub\DiGi\DiGi.Test\files\OrtoDatas_BoundingBox2D_Building2D.json");
 
-                OrtoDatas? ortoDatas = GIS.Query.OrtoDatas(building2D, directory_OrtoDatas) ?? throw new Exception("No OrtoDatas");
+                OrtoDatas? ortoDatas = GIS.Query.OrtoDatas(building2D, directory_OrtoDatas) ?? throw new InvalidOperationException("No OrtoDatas");
 
                 Core.Convert.ToSystem_FileInfo((ISerializableObject)ortoDatas, @"C:\Users\jakub\GitHub\DiGi\DiGi.Test\files\OrtoDatas_BoundingBox2D_OrtoDatas.json");
 
-                BoundingBox2D? boundingBox2D = (building2D?.PolygonalFace2D?.GetBoundingBox()) ?? throw new Exception("Invalid reometry of Building2D");
+                BoundingBox2D? boundingBox2D = (building2D?.PolygonalFace2D?.GetBoundingBox()) ?? throw new InvalidOperationException("Invalid reometry of Building2D");
 
                 foreach (OrtoData ortoData in ortoDatas)
                 {
@@ -465,7 +466,7 @@ namespace DiGi.GIS.UI.Application.Windows
                     bool inside = boundingBox2D_1.Inside(boundingBox2D);
                     if (!inside)
                     {
-                        throw new Exception("Invalid calculations for OrtoDatas");
+                        throw new InvalidOperationException("Invalid calculations for OrtoDatas");
                     }
                 }
             }
@@ -478,7 +479,7 @@ namespace DiGi.GIS.UI.Application.Windows
             OpenFileDialog openFileDialog = new()
             {
                 Title = $"Select {FileTypeName.GISModelFile}",
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.GISModelFile, FileExtension.GISModelFile)
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.GISModelFile, FileExtension.GISModelFile)
             };
             dialogResult = openFileDialog.ShowDialog();
             if (dialogResult == null || !dialogResult.HasValue || !dialogResult.Value)
@@ -491,7 +492,7 @@ namespace DiGi.GIS.UI.Application.Windows
             SaveFileDialog saveFileDialog = new()
             {
                 Title = "Save json text file",
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", "Text file", "txt")
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", "Text file", "txt")
             };
 
             dialogResult = saveFileDialog.ShowDialog();
@@ -524,7 +525,7 @@ namespace DiGi.GIS.UI.Application.Windows
             OpenFileDialog openFileDialog = new()
             {
                 Title = $"Select {FileTypeName.OrtoDatasFile}",
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.OrtoDatasFile, FileExtension.OrtoDatasFile)
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.OrtoDatasFile, FileExtension.OrtoDatasFile)
             };
             dialogResult = openFileDialog.ShowDialog();
             if (dialogResult == null || !dialogResult.HasValue || !dialogResult.Value)
@@ -537,7 +538,7 @@ namespace DiGi.GIS.UI.Application.Windows
             SaveFileDialog saveFileDialog = new()
             {
                 Title = "Save json text file",
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", "Text file", "txt")
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", "Text file", "txt")
             };
 
             dialogResult = saveFileDialog.ShowDialog();
@@ -581,7 +582,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Appending Building Models! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Appending Building Models! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         // TODO [YearBuiltPipelineFileSource]: Superseded by the automated Year Built Prediction pipeline (DiGi-Organization/DiGi.YOLO#1). Do not remove without: 1. An automated pipeline run (wiki "Running a County", DiGi-Organization/DiGi.GIS.YOLO.UI) completes a full sweep for at least one county against deployed PostgreSQL data, with the building_data detection and populated-year columns filled for that county, 2. Full database coverage established, 3. An explicit decision and developer opt-in (tracking checklist: DiGi-Organization/DiGi.YOLO#11).
@@ -596,7 +597,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Appending Prediction Year Builts! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Appending Prediction Year Builts! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         // TODO [YearBuiltPipelineFileSource]: Superseded by the automated Year Built Prediction pipeline (DiGi-Organization/DiGi.YOLO#1). Do not remove without: 1. An automated pipeline run (wiki "Running a County", DiGi-Organization/DiGi.GIS.YOLO.UI) completes a full sweep for at least one county against deployed PostgreSQL data, with the building_data detection and populated-year columns filled for that county, 2. Full database coverage established, 3. An explicit decision and developer opt-in (tracking checklist: DiGi-Organization/DiGi.YOLO#11).
@@ -611,7 +612,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Appending Table! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Appending Table! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private void AppendVoTTModel_OrtoRange()
@@ -624,7 +625,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Appending VoTT Model! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Appending VoTT Model! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         // TODO [YearBuiltPipelineFileSource]: Superseded by DiGi.GIS.YOLO.UI Modify.AppendYOLOTrainingDatasetAsync (DiGi-Organization/DiGi.GIS.YOLO.UI#13). Do not remove until the DB-sourced dataset builder (DiGi-Organization/DiGi.GIS.YOLO.UI#13) has appended a dataset from deployed data and weights trained on it have passed the acceptance gate of DiGi-Organization/DiGi.GIS.YOLO.UI#12; tracking checklist: DiGi-Organization/DiGi.YOLO#11.
@@ -657,7 +658,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Appending YOLO Model! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Appending YOLO Model! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private void Button_AppendBuildingModels_Click(object sender, RoutedEventArgs e)
@@ -677,7 +678,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Appending Predictions! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Appending Predictions! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
 #pragma warning restore CS0618
         }
 
@@ -756,7 +757,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Calculating! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Calculating! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private void Button_CompareJsons_Click(object sender, RoutedEventArgs e)
@@ -768,7 +769,7 @@ namespace DiGi.GIS.UI.Application.Windows
             openFileDialog = new()
             {
                 Title = "Select json text file",
-                Filter = string.Format("{0} (*.{1})|*.{1}|{2} (*.{3})|*.{3}|All files (*.*)|*.*", "Text file", "txt", "JSON file", "json")
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|{2} (*.{3})|*.{3}|All files (*.*)|*.*", "Text file", "txt", "JSON file", "json")
             };
 
             dialogResult = openFileDialog.ShowDialog();
@@ -782,7 +783,7 @@ namespace DiGi.GIS.UI.Application.Windows
             openFileDialog = new()
             {
                 Title = "Select json text file",
-                Filter = string.Format("{0} (*.{1})|*.{1}|{2} (*.{3})|*.{3}|All files (*.*)|*.*", "Text file", "txt", "JSON file", "json")
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|{2} (*.{3})|*.{3}|All files (*.*)|*.*", "Text file", "txt", "JSON file", "json")
             };
 
             dialogResult = openFileDialog.ShowDialog();
@@ -849,7 +850,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Refreshing! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Refreshing! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private async void Button_RefreshBuiliding2Ds_Click(object sender, RoutedEventArgs e)
@@ -868,7 +869,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Refreshing! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Refreshing! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private void Button_ResaveGISModels_Click(object sender, RoutedEventArgs e)
@@ -909,7 +910,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Resaving! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Resaving! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private void Button_ResaveOrtoDatasFiles_Click(object sender, RoutedEventArgs e)
@@ -1109,7 +1110,7 @@ namespace DiGi.GIS.UI.Application.Windows
                 occupancy += administrativeSubdivision.Occupancy.Value;
             }
 
-            MessageBox.Show(string.Format("Occupancy: {0}", occupancy));
+            MessageBox.Show(string.Format(CultureInfo.CurrentCulture, "Occupancy: {0}", occupancy));
 
         }
 
@@ -1184,8 +1185,7 @@ namespace DiGi.GIS.UI.Application.Windows
             client.BaseAddress = new Uri("https://api.digiproject.uk");
 
             // Tworzymy obiekt z parametrem, w pełni zgodny ze schematem z Twojego Swaggera
-            var requestBody = new JsonObject
-            {
+            JsonObject requestBody = new() {
                 ["Text"] = "Łomianki Dolne"
             };
 
@@ -1271,7 +1271,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             if (administrativeAreal2DReferences_All_1.Count != administrativeAreal2DReferences_All_2.Count)
             {
-                throw new Exception();
+                throw new InvalidOperationException();
             }
 
             PostgreSQL.Classes.AdministrativeAreal2DReference? administrativeAreal2DReference = await administrativeAreal2DPostgreSQLConverter.GetAdministrativeAreal2DReferenceByCodeAsync("02");
@@ -1415,7 +1415,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Updating! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Updating! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private async void Button_UpdateBuiliding2Ds_Click(object sender, RoutedEventArgs e)
@@ -1493,7 +1493,7 @@ namespace DiGi.GIS.UI.Application.Windows
                 string? code = gISModel_Input.Reference;
                 if (!string.IsNullOrWhiteSpace(code))
                 {
-                    code = code.ToUpper();
+                    code = code.ToUpper(CultureInfo.CurrentCulture);
                     int index = code.IndexOf('_');
                     if (index != -1)
                     {
@@ -1518,7 +1518,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Updating! [{0}]{1}", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds), count_Rejected == 0 ? string.Empty : string.Format(" Rejected: {0}", count_Rejected));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Updating! [{0}]{1}", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds), count_Rejected == 0 ? string.Empty : string.Format(CultureInfo.CurrentCulture, " Rejected: {0}", count_Rejected));
         }
 
         private async void Button_UpdateOrtoDatas_FromFile_Click(object sender, RoutedEventArgs e)
@@ -1622,7 +1622,7 @@ namespace DiGi.GIS.UI.Application.Windows
                 string? code = gISModel_Input.Reference;
                 if (!string.IsNullOrWhiteSpace(code))
                 {
-                    code = code.ToUpper();
+                    code = code.ToUpper(CultureInfo.CurrentCulture);
                     int index = code.IndexOf('_');
                     if (index != -1)
                     {
@@ -1696,7 +1696,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Updating! [{0}]{1}", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds), count_Rejected == 0 ? string.Empty : string.Format(" Rejected: {0}", count_Rejected));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Updating! [{0}]{1}", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds), count_Rejected == 0 ? string.Empty : string.Format(CultureInfo.CurrentCulture, " Rejected: {0}", count_Rejected));
         }
 
         private void Button_WriteStatisticalDataCollections_Click(object sender, RoutedEventArgs e)
@@ -1728,7 +1728,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Calculating! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Calculating! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private void CalculateGISModelFiles()
@@ -1741,7 +1741,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Calculating! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Calculating! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private async void CalculateOrtoDatas_Building2D(int count = 100)
@@ -1754,7 +1754,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Calculating! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Calculating! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private async void CalculateOrtoDatas_OrtoRange(int count = 100)
@@ -1772,7 +1772,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Calculating! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Calculating! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private void CalculateOrtoDatasComparisons()
@@ -1791,7 +1791,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Calculating! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Calculating! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private void CalculateOrtoRanges()
@@ -1808,7 +1808,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Calculating! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Calculating! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private void CheckAdministrativeAreal2D()
@@ -1928,7 +1928,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Checking! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s:{4}ms", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Checking! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s:{4}ms", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds));
         }
 
         // TODO [YearBuiltPipelineFileSource]: Superseded by the automated Year Built Prediction pipeline (DiGi-Organization/DiGi.YOLO#1). Do not remove without: 1. An automated pipeline run (wiki "Running a County", DiGi-Organization/DiGi.GIS.YOLO.UI) completes a full sweep for at least one county against deployed PostgreSQL data, with the building_data detection and populated-year columns filled for that county, 2. Full database coverage established, 3. An explicit decision and developer opt-in (tracking checklist: DiGi-Organization/DiGi.YOLO#11).
@@ -2019,7 +2019,7 @@ namespace DiGi.GIS.UI.Application.Windows
                                     continue;
                                 }
 
-                                string fileName = string.Format("{0}_{1}.{2}", ortoDatas.Reference, ortoData.DateTime.Year.ToString(), "jpeg");
+                                string fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.{2}", ortoDatas.Reference, ortoData.DateTime.Year.ToString(CultureInfo.CurrentCulture), "jpeg");
 
                                 using Image image = Image.FromStream(new MemoryStream(ortoData.Bytes));
                                 image.Save(System.IO.Path.Combine(directory_Destination, fileName), ImageFormat.Jpeg);
@@ -2114,7 +2114,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Recalculating! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Recalculating! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private void Reduce()
@@ -2168,7 +2168,7 @@ namespace DiGi.GIS.UI.Application.Windows
                                 continue;
                             }
 
-                            string fileName = string.Format("{0}_{1}.{2}", ortoDatas.Reference, ortoData.DateTime.Year.ToString(), "jpg");
+                            string fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.{2}", ortoDatas.Reference, ortoData.DateTime.Year.ToString(CultureInfo.CurrentCulture), "jpg");
 
                             using Image image = Image.FromStream(new MemoryStream(ortoData.Bytes));
                             image.Save(System.IO.Path.Combine(directory_Temp_Before, fileName), ImageFormat.Jpeg);
@@ -2189,7 +2189,7 @@ namespace DiGi.GIS.UI.Application.Windows
                                 continue;
                             }
 
-                            string fileName = string.Format("{0}_{1}.{2}", ortoDatas.Reference, ortoData.DateTime.Year.ToString(), "jpg");
+                            string fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.{2}", ortoDatas.Reference, ortoData.DateTime.Year.ToString(CultureInfo.CurrentCulture), "jpg");
 
                             using Image image = Image.FromStream(new MemoryStream(ortoData.Bytes));
                             image.Save(System.IO.Path.Combine(directory_Temp_After, fileName), ImageFormat.Jpeg);
@@ -2257,7 +2257,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Resaving! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Resaving! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
 
             MessageBox.Show("Finished!");
         }
@@ -2643,7 +2643,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Converting! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Converting! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private void UpdateUpdateAdministrativeAreal2DsCodes()
@@ -2784,7 +2784,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Writing! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Writing! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private async void WriteStatisticalDataCollections()
@@ -2799,7 +2799,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Writing! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Writing! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private async void Button_RefreshOrtoDatas_Click(object sender, RoutedEventArgs e)
@@ -2815,7 +2815,7 @@ namespace DiGi.GIS.UI.Application.Windows
             }
 
             TextBlock_Progress.Text = string.Format(
-                "Refresh OrtoDatas{0}: {1} queued of {2} read, {3} subdivision ids written, {4} of {5} counties stepped over",
+                CultureInfo.CurrentCulture, "Refresh OrtoDatas{0}: {1} queued of {2} read, {3} subdivision ids written, {4} of {5} counties stepped over",
                 postgreSQLOrtoDatasRefreshResult.Cancelled ? " cancelled" : " done",
                 postgreSQLOrtoDatasRefreshResult.EnqueuedCount,
                 postgreSQLOrtoDatasRefreshResult.ReadCount,
@@ -2894,7 +2894,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             if (count_Rejected != 0)
             {
-                MessageBox.Show(string.Format("Finished, but {0} OrtoDatas were rejected before the database.", count_Rejected));
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, "Finished, but {0} OrtoDatas were rejected before the database.", count_Rejected));
             }
         }
 
@@ -2987,7 +2987,7 @@ namespace DiGi.GIS.UI.Application.Windows
                 string? code = gISModel_Input.Reference;
                 if (!string.IsNullOrWhiteSpace(code))
                 {
-                    code = code.ToUpper();
+                    code = code.ToUpper(CultureInfo.CurrentCulture);
                     int index = code.IndexOf('_');
                     if (index != -1)
                     {
@@ -3064,7 +3064,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Updating! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Updating! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
 
         private async void Button_OccupancyDatas_FromFile_Click(object sender, RoutedEventArgs e)
@@ -3156,7 +3156,7 @@ namespace DiGi.GIS.UI.Application.Windows
                 string? code = gISModel_Input.Reference;
                 if (!string.IsNullOrWhiteSpace(code))
                 {
-                    code = code.ToUpper();
+                    code = code.ToUpper(CultureInfo.CurrentCulture);
                     int index = code.IndexOf('_');
                     if (index != -1)
                     {
@@ -3248,7 +3248,7 @@ namespace DiGi.GIS.UI.Application.Windows
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 
-            TextBlock_Progress.Text = string.Format("Done Updating! [{0}]", string.Format("{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
+            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Updating! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
         }
     }
 }

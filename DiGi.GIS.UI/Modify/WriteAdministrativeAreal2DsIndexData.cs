@@ -69,7 +69,9 @@ namespace DiGi.GIS.UI
                 administrativeAreal2Ds.AddRange(administrativeAreal2Ds_Temp);
             }
 
-            administrativeAreal2Ds.Sort((x, y) => (x.Name ?? string.Empty).CompareTo(y.Name ?? string.Empty));
+#pragma warning disable CA1309 // index order by display name: the culture-aware order it always had
+            administrativeAreal2Ds.Sort((x, y) => string.Compare(x.Name ?? string.Empty, y.Name ?? string.Empty, StringComparison.CurrentCulture));
+#pragma warning restore CA1309
 
             IndexDataFile? indexDataFile = GIS.Create.IndexDataFile(administrativeAreal2Ds);
             if (indexDataFile == null)

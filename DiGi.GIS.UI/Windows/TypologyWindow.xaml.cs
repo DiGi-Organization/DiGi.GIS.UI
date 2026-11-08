@@ -5,6 +5,7 @@ using DiGi.GIS.UI.Controls;
 using DiGi.Typology.Classes;
 using DiGi.UI.WPF.Classes;
 using LiveCharts;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -95,7 +96,7 @@ namespace DiGi.GIS.UI.Windows
                 return null;
             }
 
-            return [.. Directory.GetFiles(directory, string.Format("*.{0}", Constants.FileExtension.GISModelFile), SearchOption.TopDirectoryOnly)];
+            return [.. Directory.GetFiles(directory, string.Format(CultureInfo.CurrentCulture, "*.{0}", Constants.FileExtension.GISModelFile), SearchOption.TopDirectoryOnly)];
         }
 
         private List<GISModel>? GetActiveGISModels()
@@ -276,7 +277,7 @@ namespace DiGi.GIS.UI.Windows
                 buildingShape = buildingShapeSolver.Output;
             }
 
-            MessageBox.Show(this, string.Format("Building shape: {0}", Core.Query.Description(buildingShape)), "Building Shape", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(this, string.Format(CultureInfo.CurrentCulture, "Building shape: {0}", Core.Query.Description(buildingShape)), "Building Shape", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void MenuItem_Close_Click(object sender, RoutedEventArgs e)
@@ -328,7 +329,7 @@ namespace DiGi.GIS.UI.Windows
                 return;
             }
 
-            string path_OrtoDatasFile = System.IO.Path.Combine(directoryName, string.Format("{0}.{1}", System.IO.Path.GetFileNameWithoutExtension(path), Constants.FileExtension.OrtoDatasFile));
+            string path_OrtoDatasFile = System.IO.Path.Combine(directoryName, string.Format(CultureInfo.CurrentCulture, "{0}.{1}", System.IO.Path.GetFileNameWithoutExtension(path), Constants.FileExtension.OrtoDatasFile));
 
             HashSet<GuidReference>? guidReferences = await GIS.Modify.CalculateOrtoDatas([building2D], path_OrtoDatasFile, Create.OrtoDatasBuilding2DOptions(), true);
             if (guidReferences != null && guidReferences.Count != 0)
@@ -393,7 +394,7 @@ namespace DiGi.GIS.UI.Windows
                 ListBox_References.Items.Add(reference);
             }
 
-            Label_Count.Content = string.Format("Count: {0}", references.Count);
+            Label_Count.Content = string.Format(CultureInfo.CurrentCulture, "Count: {0}", references.Count);
 
             PieChart_Main.Series = [];
 

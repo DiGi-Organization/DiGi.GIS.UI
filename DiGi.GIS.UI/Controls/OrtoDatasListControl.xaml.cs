@@ -1,5 +1,6 @@
 ﻿using DiGi.GIS.Classes;
 using DiGi.GIS.UI.Delegates;
+using System.Globalization;
 using System.Windows.Controls;
 
 namespace DiGi.GIS.UI.Controls
@@ -114,7 +115,7 @@ namespace DiGi.GIS.UI.Controls
             {
                 OrtoDatas ortoDatas = ortoDatasList.ElementAt(i);
 
-                ListBox_Main.Items.Add(new ListBoxItem() { Content = string.Format("[{0}] {1}", i + 1, ortoDatas.Reference), Tag = ortoDatas });
+                ListBox_Main.Items.Add(new ListBoxItem() { Content = string.Format(CultureInfo.CurrentCulture, "[{0}] {1}", i + 1, ortoDatas.Reference), Tag = ortoDatas });
             }
         }
     }

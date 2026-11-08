@@ -3,6 +3,7 @@ using DiGi.GIS.Classes;
 using DiGi.GIS.UI.Classes;
 using DiGi.YOLO.Classes;
 using Microsoft.Win32;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -50,7 +51,7 @@ namespace DiGi.GIS.UI
             {
                 SaveFileDialog saveFileDialog = new()
                 {
-                    Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", "YOLO yaml File", "yaml"),
+                    Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", "YOLO yaml File", "yaml"),
                     FileName = "conf.yaml",
                     Title = "Select YOLO yaml file",
                     OverwritePrompt = false
@@ -163,7 +164,7 @@ namespace DiGi.GIS.UI
                             continue;
                         }
 
-                        string path_Image = string.Format("{0}_{1}.jpeg", pathPrefix, year);
+                        string path_Image = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.jpeg", pathPrefix, year);
 
                         JpegBitmapEncoder jpegBitmapEncoder = new();
                         jpegBitmapEncoder.Frames.Add(BitmapFrame.Create(bitmapImage));
@@ -238,7 +239,7 @@ namespace DiGi.GIS.UI
             {
                 SaveFileDialog saveFileDialog = new()
                 {
-                    Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", "YOLO yaml File", "yaml"),
+                    Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", "YOLO yaml File", "yaml"),
                     FileName = "conf.yaml",
                     Title = "Select YOLO yaml file",
                     OverwritePrompt = false
@@ -306,7 +307,7 @@ namespace DiGi.GIS.UI
                     continue;
                 }
 
-                string path_OrtoRange = Path.Combine(directory_Input, string.Format("{0}.{1}", Path.GetFileNameWithoutExtension(path_Input), Constants.FileExtension.OrtoRangeFile));
+                string path_OrtoRange = Path.Combine(directory_Input, string.Format(CultureInfo.CurrentCulture, "{0}.{1}", Path.GetFileNameWithoutExtension(path_Input), Constants.FileExtension.OrtoRangeFile));
                 if (!File.Exists(path_OrtoRange))
                 {
                     continue;
@@ -385,7 +386,7 @@ namespace DiGi.GIS.UI
 
                         int year = ortoData.DateTime.Year;
 
-                        string path_Image = string.Format("{0}_{1}.jpeg", pathPrefix, year);
+                        string path_Image = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.jpeg", pathPrefix, year);
 
                         JpegBitmapEncoder jpegBitmapEncoder = new();
                         jpegBitmapEncoder.Frames.Add(BitmapFrame.Create(bitmapImage));

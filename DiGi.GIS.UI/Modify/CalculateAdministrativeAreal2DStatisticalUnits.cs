@@ -1,6 +1,7 @@
 ﻿using DiGi.GIS.Classes;
 using DiGi.GIS.Constants;
 using Microsoft.Win32;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 
@@ -22,7 +23,7 @@ namespace DiGi.GIS.UI
 
             openFileDialog = new OpenFileDialog
             {
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.StatisticalUnitFile, FileExtension.StatisticalUnitFile)
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.StatisticalUnitFile, FileExtension.StatisticalUnitFile)
             };
             result = openFileDialog.ShowDialog(owner);
             if (result == null || !result.HasValue || !result.Value)
@@ -49,7 +50,7 @@ namespace DiGi.GIS.UI
 
             if (!string.IsNullOrEmpty(fileNameSufix))
             {
-                paths_GISModelFile.RemoveAll(x => Path.GetFileNameWithoutExtension(x).EndsWith(fileNameSufix));
+                paths_GISModelFile.RemoveAll(x => Path.GetFileNameWithoutExtension(x).EndsWith(fileNameSufix, StringComparison.CurrentCulture));
             }
 
             StatisticalUnit? statisticalUnit = null;
@@ -142,7 +143,7 @@ namespace DiGi.GIS.UI
 
                     foreach (AdministrativeAreal2D administrativeAreal2D in keyValuePair.Value)
                     {
-                        report.Add(string.Format("{0}\t{1}\t{2}", name, administrativeAreal2D.Name, administrativeAreal2D.Reference));
+                        report.Add(string.Format(CultureInfo.CurrentCulture, "{0}\t{1}\t{2}", name, administrativeAreal2D.Name, administrativeAreal2D.Reference));
                     }
                 }
 

@@ -1,4 +1,5 @@
 ﻿using DiGi.GIS.Classes;
+using System.Globalization;
 using System.Windows.Controls;
 
 namespace DiGi.GIS.UI.Controls
@@ -31,7 +32,7 @@ namespace DiGi.GIS.UI.Controls
             {
                 TextBox_Guid.Text = building2D.Guid.ToString();
                 TextBox_Reference.Text = building2D.Reference;
-                TextBox_Storeys.Text = building2D.Storeys.ToString();
+                TextBox_Storeys.Text = building2D.Storeys.ToString(CultureInfo.CurrentCulture);
 
                 if (building2D.BuildingGeneralFunction != null)
                 {

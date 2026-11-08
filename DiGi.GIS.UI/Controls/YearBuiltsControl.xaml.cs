@@ -1,4 +1,5 @@
 ﻿using DiGi.GIS.Classes;
+using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -257,7 +258,7 @@ namespace DiGi.GIS.UI.Controls
                     continue;
                 }
 
-                ListBox_Main.Items.Add(new ListBoxItem() { Content = string.Format("[{0}] {1}", i + 1, reference), Tag = building2D });
+                ListBox_Main.Items.Add(new ListBoxItem() { Content = string.Format(CultureInfo.CurrentCulture, "[{0}] {1}", i + 1, reference), Tag = building2D });
             }
 
             ListBox_Main.SelectionChanged += ListBox_Main_SelectionChanged;

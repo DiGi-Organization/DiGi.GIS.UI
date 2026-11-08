@@ -1,6 +1,7 @@
 ﻿using DiGi.GIS.Classes;
 using DiGi.GIS.Constants;
 using Microsoft.Win32;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 
@@ -49,7 +50,7 @@ namespace DiGi.GIS.UI
                     }
                 }
 
-                string path_Output = Path.Combine(Path.GetDirectoryName(path_Input)!, string.Format("{0}.{1}", Path.GetFileNameWithoutExtension(path_Input), FileExtension.OrtoRangeFile));
+                string path_Output = Path.Combine(Path.GetDirectoryName(path_Input)!, string.Format(CultureInfo.CurrentCulture, "{0}.{1}", Path.GetFileNameWithoutExtension(path_Input), FileExtension.OrtoRangeFile));
 
                 if (ortoRanges != null)
                 {

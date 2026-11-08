@@ -6,6 +6,7 @@ using DiGi.GIS.Constants;
 using Microsoft.Win32;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 
@@ -85,7 +86,7 @@ namespace DiGi.GIS.UI
                     continue;
                 }
 
-                string fileName = string.Format("{0}_{1}.{2}", ortoDatas.Reference, ortoData!.DateTime.Year.ToString(), "jpeg");
+                string fileName = string.Format(CultureInfo.CurrentCulture, "{0}_{1}.{2}", ortoDatas.Reference, ortoData!.DateTime.Year.ToString(CultureInfo.CurrentCulture), "jpeg");
 
                 using Image image = Image.FromStream(new MemoryStream(bytes));
                 if (drawGeometry && point2Ds != null)
@@ -148,7 +149,7 @@ namespace DiGi.GIS.UI
             OpenFileDialog openFileDialog = new()
             {
                 Title = "Select GIS Model file",
-                Filter = string.Format("{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.GISModelFile, FileExtension.GISModelFile)
+                Filter = string.Format(CultureInfo.CurrentCulture, "{0} (*.{1})|*.{1}|All files (*.*)|*.*", FileTypeName.GISModelFile, FileExtension.GISModelFile)
             };
             dialogResult = openFileDialog.ShowDialog();
             if (dialogResult == null || !dialogResult.HasValue || !dialogResult.Value)

@@ -3,6 +3,7 @@ using DiGi.Core.Classes;
 using DiGi.GIS.Classes;
 using DiGi.GIS.Constants;
 using Microsoft.Win32;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 
@@ -54,7 +55,7 @@ namespace DiGi.GIS.UI
                     List<Building2D>? building2Ds = gISModel.GetObjects<Building2D>();
                     if (building2Ds != null)
                     {
-                        string path = System.IO.Path.Combine(directory_Input, string.Format("{0}.{1}", System.IO.Path.GetFileNameWithoutExtension(path_Input), FileExtension.OrtoDatasFile));
+                        string path = System.IO.Path.Combine(directory_Input, string.Format(CultureInfo.CurrentCulture, "{0}.{1}", System.IO.Path.GetFileNameWithoutExtension(path_Input), FileExtension.OrtoDatasFile));
 
                         while (building2Ds.Count > 0)
                         {
@@ -114,7 +115,7 @@ namespace DiGi.GIS.UI
                 List<OrtoRange?>? ortoRanges = ortoRangeFile.GetValues<OrtoRange>()?.ToList();
                 if (ortoRanges != null)
                 {
-                    string path = System.IO.Path.Combine(directory_Input, string.Format("{0}.{1}", System.IO.Path.GetFileNameWithoutExtension(path_Input), FileExtension.OrtoDatasFile));
+                    string path = System.IO.Path.Combine(directory_Input, string.Format(CultureInfo.CurrentCulture, "{0}.{1}", System.IO.Path.GetFileNameWithoutExtension(path_Input), FileExtension.OrtoDatasFile));
 
                     while (ortoRanges.Count > 0)
                     {
