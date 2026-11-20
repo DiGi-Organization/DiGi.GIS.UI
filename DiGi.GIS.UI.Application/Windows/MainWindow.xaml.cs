@@ -1699,11 +1699,6 @@ namespace DiGi.GIS.UI.Application.Windows
             TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Updating! [{0}]{1}", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds), count_Rejected == 0 ? string.Empty : string.Format(CultureInfo.CurrentCulture, " Rejected: {0}", count_Rejected));
         }
 
-        private void Button_WriteStatisticalDataCollections_Click(object sender, RoutedEventArgs e)
-        {
-            WriteStatisticalDataCollections();
-        }
-
         private void Button_YearBuilts_Click(object sender, RoutedEventArgs e)
         {
             Hide();
@@ -2781,21 +2776,6 @@ namespace DiGi.GIS.UI.Application.Windows
             TextBlock_Progress.Text = "Writing...";
 
             Modify.WriteImages(this, false, new Range<int>(0, 10));
-
-            TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
-
-            TextBlock_Progress.Text = string.Format(CultureInfo.CurrentCulture, "Done Writing! [{0}]", string.Format(CultureInfo.CurrentCulture, "{0}d:{1}h:{2}m:{3}s", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
-        }
-
-        private async void WriteStatisticalDataCollections()
-        {
-            DateTime dateTime = DateTime.Now;
-
-            TextBlock_Progress.Text = "Writing...";
-
-            //Enum.GetValues<Variable>()
-
-            await Modify.WriteStatisticalDataCollections(Enum.GetValues<Variable>(), new Range<int>(2008, DateTime.Now.Year));
 
             TimeSpan timeSpan = new((DateTime.Now - dateTime).Ticks);
 

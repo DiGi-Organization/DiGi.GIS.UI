@@ -1659,33 +1659,6 @@ Optional collection of points defining the offset polygon edge\.
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 `true` if the images were successfully written; otherwise, `false`\.
 
-<a name='DiGi.GIS.UI.Modify.WriteStatisticalDataCollections(System.Collections.Generic.IEnumerable_DiGi.BDL.Enums.Variable_,DiGi.Core.Classes.Range_int_)'></a>
-
-## Modify\.WriteStatisticalDataCollections\(IEnumerable\<Variable\>, Range\<int\>\) Method
-
-Asynchronously writes the specified statistical data collections to a file selected via an open file dialog\.
-
-```csharp
-public static System.Threading.Tasks.Task<bool> WriteStatisticalDataCollections(System.Collections.Generic.IEnumerable<DiGi.BDL.Enums.Variable>? variables, DiGi.Core.Classes.Range<int>? years);
-```
-#### Parameters
-
-<a name='DiGi.GIS.UI.Modify.WriteStatisticalDataCollections(System.Collections.Generic.IEnumerable_DiGi.BDL.Enums.Variable_,DiGi.Core.Classes.Range_int_).variables'></a>
-
-`variables` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[DiGi\.BDL\.Enums\.Variable](https://learn.microsoft.com/en-us/dotnet/api/digi.bdl.enums.variable 'DiGi\.BDL\.Enums\.Variable')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
-
-The collection of variables to be written to the file\.
-
-<a name='DiGi.GIS.UI.Modify.WriteStatisticalDataCollections(System.Collections.Generic.IEnumerable_DiGi.BDL.Enums.Variable_,DiGi.Core.Classes.Range_int_).years'></a>
-
-`years` [DiGi\.Core\.Classes\.Range&lt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.range-1 'DiGi\.Core\.Classes\.Range\`1')[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.range-1 'DiGi\.Core\.Classes\.Range\`1')
-
-The range of years for which the statistical data should be recorded\.
-
-#### Returns
-[System\.Threading\.Tasks\.Task&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1 'System\.Threading\.Tasks\.Task\`1')[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1 'System\.Threading\.Tasks\.Task\`1')  
-A task that represents the asynchronous operation\. The task result contains [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') if the data was successfully written; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
-
 <a name='DiGi.GIS.UI.Modify.WriteStatisticalUnit()'></a>
 
 ## Modify\.WriteStatisticalUnit\(\) Method

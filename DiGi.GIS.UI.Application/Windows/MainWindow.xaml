@@ -18,7 +18,6 @@
                 <Label Content="General" HorizontalAlignment="Center" />
                 <Button x:Name="Button_ToDiGiGISModelFiles" Content="Convert from BDOT10k" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" Width="190" Click="Button_ToDiGiGISModelFiles_Click" />
                 <Button x:Name="Button_CalculateGISModelFiles" Content="Calculate GISModels" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" Width="190" Click="Button_CalculateGISModelFiles_Click" />
-                <Button x:Name="Button_WriteStatisticalDataCollections" Content="Write StatisticalDataCollections" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" Width="190" Click="Button_WriteStatisticalDataCollections_Click" Visibility="Visible" />
                 <Button x:Name="Button_CalculateOrtoRanges" Content="Calculate OrtoRanges" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" Width="190" Click="Button_CalculateOrtoRanges_Click" />
             </StackPanel>
 
